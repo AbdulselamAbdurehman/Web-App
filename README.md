@@ -3,7 +3,7 @@
 - Abdulselam Abdurehman    UGR/2455/14
 - Daniel Asrat             UGR/
 - Jemil Hamza              UGR/4296/14
-- Michael Teshome          UGR/1408/11
+- Michael Teshome          ATR/1408/11
 # Title - InfoMirror
 InfoMirror is a web application that brings the concept of a Smart Mirror to the digital realm. It utilizes JWT (JSON Web Token) token-based authentication for secure access control. The application provides users with a personalized information display experience through their web browser.
 
