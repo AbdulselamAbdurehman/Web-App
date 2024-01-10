@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Students</title>
+    <!-- Add Tailwind CSS CDN or include your own setup -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add Feather Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-200 font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-700 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Online Quiz</h1>
+            <a href="logout-success.html" class="logout-button bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300">Logout</a>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8 flex">
+        <!-- Left Side - Teacher Info -->
+        <div class="w-1/4 p-4">
+            <img src="images/teacher.png" alt="Teacher Image" class="w-full h-auto rounded">
+            <div class="mt-4">
+                <p class="font-semibold">Studnt Name</p>
+                <p class="text-gray-500">(Student)</p>
+            </div>
+        </div>
+
+        <!-- Right Side - Quiz Questions Form -->
+        <div class="w-3/4 p-4">
+            <div class="bg-white p-6 rounded shadow-md mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Quiz Questions</h2>
+
+                <!-- Course Name -->
+                <div class="mb-4">
+                    <p class="text-lg font-semibold">Course Name: Mathematics</p>
+                </div>
+
+                <!-- Quiz Questions Form -->
+                <form id="quizForm">
+                    <!-- Sample Quiz Question (Replace with actual data) -->
+                    <div class="mb-4">
+                        <p class="font-semibold">1. What is the capital of France?</p>
+                        <input type="radio" name="q1" id="q1OptionA" value="A" class="mr-2">
+                        <label for="q1OptionA">Paris</label><br>
+                        <input type="radio" name="q1" id="q1OptionB" value="B" class="mr-2">
+                        <label for="q1OptionB">London</label><br>
+                        <input type="radio" name="q1" id="q1OptionC" value="C" class="mr-2">
+                        <label for="q1OptionC">Berlin</label><br>
+                        <input type="radio" name="q1" id="q1OptionD" value="D" class="mr-2">
+                        <label for="q1OptionD">Madrid</label>
+                    </div>
+
+                    <!-- Additional Quiz Questions (Repeat the structure for each question) -->
+
+                    <div class="mb-4">
+                        <p class="font-semibold">2. What is the square root of 25?</p>
+                        <input type="radio" name="q2" id="q2OptionA" value="A" class="mr-2">
+                        <label for="q2OptionA">5</label><br>
+                        <input type="radio" name="q2" id="q2OptionB" value="B" class="mr-2">
+                        <label for="q2OptionB">4</label><br>
+                        <input type="radio" name="q2" id="q2OptionC" value="C" class="mr-2">
+                        <label for="q2OptionC">3</label><br>
+                        <input type="radio" name="q2" id="q2OptionD" value="D" class="mr-2">
+                        <label for="q2OptionD">2</label>
+                    </div>
+
+                    <!-- Add more questions as needed -->
+
+                    <!-- Submit Button -->
+                    <button type="button" onclick="submitQuiz()" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                        Submit
+                    </button>
+                </form>
+
+                <!-- Results (Initially hidden, displayed after submission) -->
+                <div id="results" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold mb-2">Results</h3>
+                    <p id="resultQ1"></p>
+                    <p id="resultQ2"></p>
+                    <!-- Add more result elements for each question -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
+     <footer>
+        <p>&copy; 2024 Online Quiz. Made in Ethiopia.</p>
+      </footer>
+
+    <!-- Feather Icons Script -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+
+
+
+    <!-- Feather Icons Script -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+
+        function submitQuiz() {
+            // Simulated results (Replace with your actual evaluation logic)
+            const answers = {
+                q1: 'C', // Correct answer is Berlin
+                q2: 'A', // Correct answer is 5
+                // Add more correct answers for each question
+            };
+
+            // Display results
+            Object.keys(answers).forEach(question => {
+                const selectedOption = document.querySelector(`input[name=${question}]:checked`);
+                const resultElement = document.getElementById(`result${question}`);
+
+                if (resultElement) {
+                    if (selectedOption) {
+                        const selectedAnswer = selectedOption.value;
+                        const resultText = (selectedAnswer === answers[question]) ? 'Correct' : 'Incorrect';
+                        resultElement.textContent = `Question ${question}: ${resultText}`;
+                    } else {
+                        resultElement.textContent = `Question ${question}: Not answered`;
+                    }
+                }
+            });
+
+            // Show the results section
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
+
+

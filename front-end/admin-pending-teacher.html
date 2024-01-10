@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Students</title>
+    <!-- Add Tailwind CSS CDN or include your own setup -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add Feather Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-200 font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-700 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Online Quiz</h1>
+            <a href="logout-success.html" class="logout-button bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300">Logout</a>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <div class="container mx-auto flex-grow mt-8 flex items-center">
+        <!-- Left Side - Teacher Info -->
+        <div class="w-1/4 p-4">
+            <img src="images/admin.png" alt="Teacher Image" class="w-full h-auto rounded">
+            <div class="mt-4">
+                <p class="font-semibold">Admin</p>
+            </div>
+        </div>
+
+        <!-- Right Side - Table-like Card for Pending Teachers -->
+        <div class="w-3/4 p-4">
+            <div class="bg-white p-6 rounded shadow-md mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Pending Teachers</h2>
+
+                <!-- Table Header -->
+                <div class="flex border-b-2 border-gray-300 pb-2">
+                    <div class="w-1/4">Name</div>
+                    <div class="w-1/4">Email</div>
+                    <div class="w-1/4">Approve</div>
+                    <div class="w-1/4">Reject</div>
+                </div>
+
+                <!-- Table Rows (Replace with actual data) -->
+                <div class="flex border-b border-gray-300 py-2">
+                    <div class="w-1/4">Jane Doe</div>
+                    <div class="w-1/4">jane.doe@example.com</div>
+                    <div class="w-1/4">
+                        <button onclick="approveTeacher()" class="text-green-500 hover:text-green-700 focus:outline-none focus:underline">
+                            <i data-feather="check" class="mr-2"></i>
+                            Approve
+                        </button>
+                    </div>
+                    <div class="w-1/4">
+                        <button onclick="rejectTeacher()" class="text-red-500 hover:text-red-700 focus:outline-none focus:underline">
+                            <i data-feather="x" class="mr-2"></i>
+                            Reject
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add more rows for each pending teacher -->
+                <!-- Repeat the structure for each teacher -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-700 text-white py-2">
+        <div class="container mx-auto">
+            <p>&copy; 2024 Online Quiz. Made in Ethiopia.</p>
+        </div>
+    </footer>
+
+    <!-- Feather Icons Script -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+
+        function approveTeacher() {
+            // Implement the approve teacher functionality
+            alert('Approving Teacher');
+        }
+
+        function rejectTeacher() {
+            // Implement the reject teacher functionality
+            alert('Rejecting Teacher');
+        }
+    </script>
+
+</body>
+</html>
+
+
