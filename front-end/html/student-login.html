@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    <!-- Add Tailwind CSS CDN or include your own setup -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-200 font-sans">
+
+    <!-- Header -->
+    <header>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="teacher.html">Teacher</a></li>
+            <li><a href="student.html">Student</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8 flex justify-center">
+        <div class="bg-white p-8 rounded shadow-md w-96">
+            <h2 class="text-2xl font-semibold mb-4">Student Login</h2>
+
+            <!-- Form -->
+            <form>
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-600 text-sm font-medium mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-600 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <a href="student-dashboard.html" class="logout-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Login</a>
+
+                <!-- <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                    Login
+                </button> -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Online Quiz. Made in Ethiopia.</p>
+      </footer>
+
+</body>
+</html>

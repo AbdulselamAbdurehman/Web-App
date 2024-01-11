@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Students</title>
+    <!-- Add Tailwind CSS CDN or include your own setup -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add Feather Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-200 font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-700 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold">Online Quiz</h1>
+            <a href="logout-success.html" class="logout-button bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8 flex">
+        <!-- Left Side - Teacher Info -->
+        <div class="w-1/4 p-4">
+            <img src="../images/teacher.png" alt="Teacher Image" class="w-full h-auto rounded">
+            <div class="mt-4">
+                <p class="font-semibold">Teacher Name</p>
+                <p class="text-gray-500">(Teacher)</p>
+            </div>
+        </div>
+
+        <!-- Right Side - Action Cards -->
+        <div class="w-3/4 p-4">
+            <!-- Add Exam Card -->
+            <a href="teacher-add-exam.html" class="bg-white p-6 rounded shadow-md mb-4 flex items-center justify-center hover:bg-gray-100 transition duration-300 ease-in-out">
+                <div class="mr-4">
+                    <i data-feather="plus-circle" class="text-blue-500 w-8 h-8"></i>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-lg font-semibold">Add Exam</p>
+                    <p class="text-gray-500">Create a new exam</p>
+                </div>
+            </a>
+
+            <!-- View Exams Card -->
+            <a href="teacher-view-exam.html" class="bg-white p-6 rounded shadow-md flex items-center justify-center hover:bg-gray-100 transition duration-300 ease-in-out">
+                <div class="mr-4">
+                    <i data-feather="list" class="text-blue-500 w-8 h-8"></i>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-lg font-semibold">View Exams</p>
+                    <p class="text-gray-500">Manage existing exams</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Online Quiz. Made in Ethiopia.</p>
+      </footer>
+
+    <!-- Feather Icons Script -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+    </script>
+
+</body>
+</html>
+
