@@ -35,17 +35,22 @@ async function signup(event) {
         if (response.status === 201) {
             localStorage.setItem('token', data.token);
             if (role === "STUDENT") {
-                window.location.href = "../student.html";
+                window.location.href = "../home.html";
             } else {
-                window.location.href = "../instructor.html";
+                window.location.href = "../home.html";
             }
         }
+
+        if (!response.ok){
+            throw new Error(response.message);
+        }
+
     } catch (error) {
         if (error instanceof TypeError && error.message.includes('Network request failed')) {
             alert('Network error. Please check your internet connection.');
         } else {
             const errorMessage = error.message || 'An unknown error occurred.';
-            alert(`Error: ${errorMessage}`);
+            alert(`${errorMessage}`);
         }
         window.location.href = '../signup.html';
     }

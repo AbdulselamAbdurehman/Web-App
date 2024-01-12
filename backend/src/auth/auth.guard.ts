@@ -27,7 +27,7 @@ import { DB_SECRET } from 'src/constants';
         );
         request['user'] = payload;
       } catch {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException("Unauthorized user");
       }
       return true;
     }

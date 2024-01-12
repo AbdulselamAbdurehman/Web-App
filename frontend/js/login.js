@@ -60,12 +60,15 @@ async function login(event) {
                 window.location.href = "../instructor.html";
             }
         }
+        if (!response.ok){
+            throw new Error(data.message);
+        }
     } catch (error) {
         if (error instanceof TypeError && error.message.includes('Network request failed')) {
             alert('Network error. Please check your internet connection.');
         } else {
             const errorMessage = error.message || 'An unknown error occurred.';
-            alert(`Please carefully enter your credentials.`);
+            alert(error.message);
         }
         window.location.href = '../home.html';
     }

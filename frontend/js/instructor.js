@@ -42,7 +42,7 @@ function renderQuiz() {
       const form = questionList.map(question => {
       const description = question.description;
       const options = question.options;
-
+      const questionNum = question.questionNumber;
       const explanation = question.explanation;
       index++;
 
@@ -50,21 +50,21 @@ function renderQuiz() {
           <fieldset class="mb-4 text-left ml-6" id="question-num-${index}">
             <legend class="text-xl font-bold flex flex-row relative w-full">${index}. ${description}
                 <span class="actions absolute top-0 right-0 flex items-center mr-2">
-                    <button class="edit-btn" id="edit-btn-${index}">
-                        <i class="fas fa-pencil-alt ml-2 mr-3"></i> <!-- Pen icon -->
-                    </button>
+                <button class="edit-btn" id="edit-btn-${index}" data-question-number=${questionNum}>
+                    <i class="fas fa-pencil-alt ml-2 mr-3"></i> <!-- Pen icon -->
+                </button>
                     <button class="delete-btn" id="delete-btn-${index}">
                         <i class="fas fa-trash-alt ml-2 mr-6"></i> <!-- Bin icon -->
                     </button>
                 </span>
           </legend>
-          <input required id="${index}1" type="radio" value="0" name="question${index}" class="mx-8">
+          <input required id="${index}1" type="radio" value="1" name="question${index}" class="mx-8">
           <label for="${index}1">${options[0]}</label><br>
-          <input id="${index}2" type="radio" value="1" name="question${index}" class="mx-8">
+          <input id="${index}2" type="radio" value="2" name="question${index}" class="mx-8">
           <label for="${index}2">${options[1]}</label><br>
-          <input id="${index}3" type="radio" value="2" name="question${index}" class="mx-8">
+          <input id="${index}3" type="radio" value="3" name="question${index}" class="mx-8">
           <label for="${index}3">${options[2]}</label><br>
-          <input id="${index}4" type="radio" value="3" name="question${index}" class="mx-8">
+          <input id="${index}4" type="radio" value="4" name="question${index}" class="mx-8">
           <label for="${index}4">${options[3]}</label><br>
           <div class="explanation hidden mt-2">
               <h3 class="text-lg font-semibold mb-1 text-gray-800">Explanation</h3>
@@ -76,6 +76,7 @@ function renderQuiz() {
         container.innerHTML = form;        
     } catch {
     console.log("undefined list");
+    return
   }
   for (let i = 1; i <= questionList.length; i++){
         const deleteButton = document.querySelector(`#delete-btn-${i}`);
@@ -85,8 +86,10 @@ function renderQuiz() {
             deleteQuestion(questionList[i-1]);
         });
 
-        editButton.addEventListener('click', () =>{
-            editQuestion(questionList[i-1]);
+        editButton.addEventListener('click', () => {
+            const questNum = editButton.dataset.questionNumber;
+            window.localStorage.setItem('questionNumber', questNum);
+            window.location.href = "../edit_question.html";
         });
   }
 
@@ -159,11 +162,6 @@ async function deleteQuestion(question) {
 }
 
 
-
-function editQuestion(question){
-    console.log("editQuestion called!");
-    alert("edition ongoing.");
-}
 
 
 let addQuestion = document.getElementById('addQuestion');

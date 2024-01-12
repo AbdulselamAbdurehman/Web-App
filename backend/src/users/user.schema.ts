@@ -13,9 +13,6 @@ export class User {
 
   @Prop()
   password: string;
-
-  @Prop()
-  questions: number[];
   
   @Prop()
   role: "INSTRUCTOR" | "STUDENT";

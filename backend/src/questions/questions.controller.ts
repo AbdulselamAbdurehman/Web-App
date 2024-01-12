@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { Question } from './question.schema';
 import { CreateQuestionDto } from './create-question.dto';
@@ -31,6 +31,7 @@ export class QuestionsController {
     return this.questionsService.updateQuestion(num, question);
   }
 
+
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('INSTRUCTOR') // Only INSTRUCTORS can access this route
   @Delete(':num')
@@ -38,4 +39,20 @@ export class QuestionsController {
     const removedQuestion = this.questionsService.deleteQuestion(num);
     console.log(removedQuestion);
   }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles('INSTRUCTOR') // Only INSTRUCTORS can access this route
+  @Get(':num')
+  async findOneByNumber(@Param('num') num: number): Promise<Question> {
+    try{
+      const question = await this.questionsService.findOneByNumber(num);
+      console.log("from question controller findOneByNumber");
+      return question;
+    } catch {
+      throw new NotFoundException("Question Not Found");
+    }
+  }
+
+
+
 }

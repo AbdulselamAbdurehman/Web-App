@@ -7,23 +7,23 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private UserModel: Model<User>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async signupUser(createUserDto: CreateUserDto): Promise<User>{
     const saltOrRounds = 10;
 
-    if (await this.UserModel.findOne({email: createUserDto.email})){
+    if (await this.userModel.findOne({email: createUserDto.email})){
       throw new HttpException("Email already exists", HttpStatus.BAD_REQUEST)
     }
 
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
-    const createdUser = new this.UserModel({...createUserDto, questions:[], password:hashedPassword});
+    const createdUser = new this.userModel({...createUserDto, password:hashedPassword});
     console.log("from users.service.ts");
     return createdUser.save();
   }
 
   async findOne(email: string): Promise<User> {
-    const user = await this.UserModel.findOne({email}).exec();
+    const user = await this.userModel.findOne({email}).exec();
     return user;
   }
   

@@ -9,14 +9,14 @@ import { QUESTION_SIZE } from 'src/constants';
 
 @Injectable()
 export class QuestionsService {
-  constructor(@InjectModel(Question.name) private QuestionModel: Model<Question>,
-              @InjectModel(Counter.name) private CounterModel: Model<Counter>) {}
+  constructor(@InjectModel(Question.name) private questionModel: Model<Question>,
+              @InjectModel(Counter.name) private counterModel: Model<Counter>) {}
 
   async createQuestion(createQuestionDto: CreateQuestionDto): Promise<Question> {
 
     try{
-      const question = new this.QuestionModel(createQuestionDto);
-      const counter = await this.CounterModel.findOneAndUpdate(
+      const question = new this.questionModel(createQuestionDto);
+      const counter = await this.counterModel.findOneAndUpdate(
         {},
         { $inc: { value: 1 } },
         { upsert: true, new: true },
@@ -30,25 +30,24 @@ export class QuestionsService {
     }
   
 }
-
             
       
   async findSome(): Promise<Question[]> {
     try {
-      const randomQuestions: Question[] = await this.QuestionModel.aggregate([
+      const randomQuestions: Question[] = await this.questionModel.aggregate([
           { $sample: { size: QUESTION_SIZE } }
       ]);
 
       return randomQuestions;
   } catch {
-    return await this.QuestionModel.find().exec();
+    return await this.questionModel.find().exec();
 
   }
 }
 
   async updateQuestion(questionNumber: number, question: UpdateQuestionDto): Promise<Question> {
     try{
-      const updatedQuestion = await this.QuestionModel.findOneAndUpdate(
+      const updatedQuestion = await this.questionModel.findOneAndUpdate(
           { questionNumber},
           { $set: question },
           { new: true }
@@ -62,10 +61,19 @@ export class QuestionsService {
   
   async deleteQuestion(questionNumber: number): Promise<Question>{
     try{
-      const removedQuestion = await this.QuestionModel.findOneAndDelete({questionNumber}).exec();
+      const removedQuestion = await this.questionModel.findOneAndDelete({questionNumber}).exec();
       return removedQuestion;
     } catch(error){
       throw new NotFoundException("Question not found");
     }
-  } 
+  }
+  
+  async findOneByNumber(questionNumber: number){
+        let question = this.questionModel.findOne({questionNumber}).exec();
+        if (question){
+          return question;
+        } else {
+          throw new Error("Question Not Found");
+        }
+  }
 }
