@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { Instructor } from 'src/instructors/instructor.schema';
+import { HydratedDocument } from 'mongoose';
 
 
 export type QuestionDocument = HydratedDocument<Question>;
@@ -16,14 +15,12 @@ export class Question {
   @Prop()
   explanation: string;
 
-  @Prop()
+  @Prop({unique: true})
   questionNumber: number;
   
   @Prop()
   options: [string];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Instructor' })
-  poster: Instructor;  
 }
     
 

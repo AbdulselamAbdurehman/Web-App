@@ -1,5 +1,4 @@
 import { IsString, IsNotEmpty, IsArray } from "class-validator";
-import { Instructor } from "src/instructors/instructor.schema";
 
 export class CreateQuestionDto{
     @IsNotEmpty()
@@ -13,6 +12,6 @@ export class CreateQuestionDto{
     @IsArray()
     options: string[];
 
-    poster: Instructor;
-
+    @IsString()
+    explanation: string;
 }

@@ -1,0 +1,29 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <!-- Include Tailwind CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+     <!-- Header -->
+     <div class="p-8 text-4xl font-bold mt-8 mb-4 text-center">Manage Questions</div>
+
+    <div id="quiz-container" class="max-w-xl mx-auto py-8"></div>
+    <button onclick="submitQuiz()" class="bg-blue-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out">Submit</button>
+    <button onclick="addQuestionForm()" class="bg-green-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-green-700 focus:outline-none focus:shadow-outline-green active:bg-green-800 transition duration-150 ease-in-out">Add Question</button>
+    <div id="result-container" class="mt-8 font-bold text-lg bg-blue-200 p-4 rounded-md"></div>
+    <!-- Back to Home Button -->
+    
+    <button class="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Log out</button>
+    <footer class="bg-black text-white text-lg text-center p-4">©2024 Online-quiz|All Rights Reserved</footer>
+    <script src="js/instructor.js"></script>
+</body>
+</html>
+
+
+
