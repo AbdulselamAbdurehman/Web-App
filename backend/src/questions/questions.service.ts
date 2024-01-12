@@ -1,50 +1,71 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Question } from './question.schema';
 import { CreateQuestionDto } from './create-question.dto';
 import { UpdateQuestionDto } from './update-question.dto';
-import { UsersService } from 'src/users/users.service';
 import { Counter } from 'src/counter.schema';
+import { QUESTION_SIZE } from 'src/constants';
 
 @Injectable()
 export class QuestionsService {
   constructor(@InjectModel(Question.name) private QuestionModel: Model<Question>,
-              @InjectModel(Counter.name) private CounterModel: Model<Counter>,
-              private readonly usersService: UsersService) {}
+              @InjectModel(Counter.name) private CounterModel: Model<Counter>) {}
 
-  async createQuestion(createQuestionDto: CreateQuestionDto, userEmail: string): Promise<Question> {
-    const question = new this.QuestionModel(createQuestionDto);
-    const counter = await this.CounterModel.findOneAndUpdate(
-      {},
-      { $inc: { value: 1 } },
-      { upsert: true, new: true },
-    );
-    console.log(createQuestionDto.description);
-    question.questionNumber = counter.value;
+  async createQuestion(createQuestionDto: CreateQuestionDto): Promise<Question> {
 
-    return question.save();
-  }
+    try{
+      const question = new this.QuestionModel(createQuestionDto);
+      const counter = await this.CounterModel.findOneAndUpdate(
+        {},
+        { $inc: { value: 1 } },
+        { upsert: true, new: true },
+      );
+      console.log(createQuestionDto.description);
+      question.questionNumber = counter.value;
+
+      return question.save();
+    } catch(error){
+      throw new BadRequestException("Invalid question data and email");
+    }
+  
+}
 
             
       
   async findSome(): Promise<Question[]> {
+    try {
+      const randomQuestions: Question[] = await this.QuestionModel.aggregate([
+          { $sample: { size: QUESTION_SIZE } }
+      ]);
+
+      return randomQuestions;
+  } catch {
     return await this.QuestionModel.find().exec();
+
   }
+}
 
-
-  async updateQuestion(questionNumber: number, question: UpdateQuestionDto, email: string): Promise<Question> {
+  async updateQuestion(questionNumber: number, question: UpdateQuestionDto): Promise<Question> {
+    try{
       const updatedQuestion = await this.QuestionModel.findOneAndUpdate(
-        { questionNumber},
-        { $set: question },
-        { new: true }
-      ).exec();
-      console.log(updatedQuestion);
-      return updatedQuestion;
+          { questionNumber},
+          { $set: question },
+          { new: true }
+        ).exec();
+        console.log(updatedQuestion);
+        return updatedQuestion;
+    } catch(error){
+      throw new BadRequestException("Invalid data");
+    }
   }
   
-  async deleteQuestion(questionNumber: number, email: string): Promise<Question>{
-    const removedQuestion = await this.QuestionModel.findOneAndDelete({questionNumber}).exec();
-    return removedQuestion;
+  async deleteQuestion(questionNumber: number): Promise<Question>{
+    try{
+      const removedQuestion = await this.QuestionModel.findOneAndDelete({questionNumber}).exec();
+      return removedQuestion;
+    } catch(error){
+      throw new NotFoundException("Question not found");
+    }
   } 
 }

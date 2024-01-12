@@ -20,22 +20,22 @@ export class QuestionsController {
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('INSTRUCTOR') // Only INSTRUCTORS can access this route
   @Post()
-  async postQuestions(@Body() data: { question: CreateQuestionDto; email: string }): Promise<Question> {
-    return await this.questionsService.createQuestion(data.question, data.email);
+  async postQuestions(@Body() question: CreateQuestionDto): Promise<Question> {
+    return await this.questionsService.createQuestion(question);
   }
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('INSTRUCTOR') // Only INSTRUCTORS can access this route
   @Patch(':num')
-  updateQuestion(@Param('num') num: number, @Body() data: { question: UpdateQuestionDto; email: string }): Promise<Question> {
-    return this.questionsService.updateQuestion(num, data.question, data.email);
+  updateQuestion(@Param('num') num: number, @Body() question: UpdateQuestionDto): Promise<Question> {
+    return this.questionsService.updateQuestion(num, question);
   }
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('INSTRUCTOR') // Only INSTRUCTORS can access this route
   @Delete(':num')
-  deleteQuestion(@Param('num') num: number, @Body() email): void {
-    const removedQuestion = this.questionsService.deleteQuestion(num, email);
+  deleteQuestion(@Param('num') num: number): void {
+    const removedQuestion = this.questionsService.deleteQuestion(num);
     console.log(removedQuestion);
   }
 }

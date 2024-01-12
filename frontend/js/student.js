@@ -1,3 +1,15 @@
+let questionList;
+async function loadQuestionsAndRenderQuiz() {
+  try {
+      questionList = await fetchQuestions(); 
+      renderQuiz(questionList);
+  } catch (error) {
+      alert(error.message);
+      console.error('Error loading questions:', error);
+      window.location.href = "../home.html";
+  }
+}
+
 async function fetchQuestions() {
     try {
         const endpoint = 'http://localhost:3000/questions/';
@@ -11,81 +23,84 @@ async function fetchQuestions() {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Only verified Students can Access the page.');
         }
-
-        const questions = await response.json();
-        return questions;
+        const questionList = await response.json();
+        return questionList;
     } catch (error) {
+        alert(error.message);
         console.error('Error fetching questions:', error);
-        window.location.href = '../home.html';
+        window.location.href = "../home.html";
     }
 }
 
-async function renderQuiz() {
-    const questions = await fetchQuestions();
-    const quizContainer = document.getElementById('quiz-container');
+function renderQuiz() {
+    const container = document.getElementById('quiz-container');
+    let index = 0;
+    try{
+      const form = questionList.map(question => {
+      const description = question.description;
+      const options = question.options;
 
-    questions.forEach(question => {
-      const questionContainer = document.createElement('div');
-      questionContainer.classList.add('question-container', 'mb-8', 'p-4', 'bg-white', 'rounded-lg', 'shadow-md');
+      const explanation = question.explanation;
+      index++;
 
-      // Display questionNumber and description
-      const questionHeader = document.createElement('h3');
-      questionHeader.textContent = `${question.questionNumber}. ${question.description}`;
-      questionHeader.classList.add('text-xl', 'font-semibold', 'mb-4');
-      questionContainer.appendChild(questionHeader);
+      return `
+      <fieldset class="mb-4 text-left ml-6">
+          <legend class="text-xl font-bold mb-4">${index}. ${description}</legend>
+          <input required id="${index}1" type="radio" value="0" name="question${index}" class="mx-8">
+          <label for="${index}1">${options[0]}</label><br>
+          <input id="${index}2" type="radio" value="1" name="question${index}" class="mx-8">
+          <label for="${index}2">${options[1]}</label><br>
+          <input id="${index}3" type="radio" value="2" name="question${index}" class="mx-8">
+          <label for="${index}3">${options[2]}</label><br>
+          <input id="${index}4" type="radio" value="3" name="question${index}" class="mx-8">
+          <label for="${index}4">${options[3]}</label><br>
+          <div class="explanation hidden mt-2">
+              <h3 class="text-lg font-semibold mb-1 text-gray-800">Explanation</h3>
+              <p class="text-sm text-gray-700">${explanation}</p>
+          </div>
+      </fieldset>`;
+  }).join('');
 
-      // Display options with radio buttons
-      const optionsContainer = document.createElement('div');
-      optionsContainer.classList.add('options-container');
-
-      question.options.forEach((option, index) => {
-        const radioLabel = document.createElement('label');
-        radioLabel.innerHTML = `
-          <input type="radio" name="question-${question.questionNumber}" value="${index}" class="mr-2 text-blue-500 focus:ring-2 focus:ring-blue-300">
-          <span class="text-lg">${option}</span>`;
-        radioLabel.classList.add('flex', 'items-center', 'mb-2');
-        optionsContainer.appendChild(radioLabel);
-      });
-
-      questionContainer.appendChild(optionsContainer);
-      questionContainer.setAttribute('data-answer', question.answer); // Add data-answer attribute
-      quizContainer.appendChild(questionContainer);
-    });
+      container.innerHTML = form;
+  } catch {
+    console.log("undefined list");
   }
+}
+let submitAnswer = document.getElementById("submit")
+submitAnswer.addEventListener('click', (event) => {
+  event.preventDefault();
 
-  
-
-
-    // Submit the quiz and display result
-  function submitQuiz() {
-    const questions = document.getElementById('quiz-container').querySelectorAll('.options-container');
-    let correctAnswers = 0;
-    let totalTriedQuestions = 0;
-    let result = '';
-
-    questions.forEach((question, index) => {
-      const selectedOption = question.querySelector('input[type="radio"]:checked');
-      
-      if (selectedOption) {
-        totalTriedQuestions++;
-        const selectedValue = parseInt(selectedOption.value, 10);
-        if (selectedValue === parseInt(question.getAttribute('data-answer'), 10) - 1) {
-          correctAnswers++;
-          result += `${index + 1}: Correct!\n`;
-        } else {
-          result += `${index + 1}: Incorrect!\n`;
-        }
+  const userAnswers = [];
+  for (let i = 1; i <= questionList.length; i++) {
+      const answer = document.querySelector(`input[name="question${i}"]:checked`)
+      if (!answer) {
+          alert(`Please answer question ${i}`);
+          return;
       }
-    });
-
-    // Display result with styling
-    const resultContainer = document.getElementById('result-container');
-    resultContainer.innerHTML = `<div class="bg-blue-200 p-4 rounded-md">${result}\nResult: ${correctAnswers} out of ${totalTriedQuestions}</div>`;
+      userAnswers.push(answer.value);
   }
 
-  // Fetch questions and render the quiz when the page loads
-  window.onload = () => {
-    renderQuiz();
+  let correct = 0
+  let explanationField = document.getElementsByClassName('explanation');
+  for (let j = 0; j < questionList.length; j++){
+      explanationField[j].classList.remove('hidden');
+      if (questionList[j].answer == userAnswers[j]){
+      correct++;
+      }
+  }
+  alert('Your answer has been submitted.');
+  let resultContainer = document.getElementById('result-container');
+  resultContainer.innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
+  resultContainer.classList.remove("hidden");
+});
+window.onload = () => {
+    loadQuestionsAndRenderQuiz();
   };
+
+let logOutButton = document.getElementById('logOut');
+logOutButton.addEventListener('click', () => {
+  window.localStorage.removeItem('token');
+  window.location.href = '../home.html';
+});

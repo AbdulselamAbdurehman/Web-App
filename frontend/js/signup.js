@@ -30,18 +30,14 @@ async function signup(event) {
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
         const data = await response.json();
 
         if (response.status === 201) {
             localStorage.setItem('token', data.token);
             if (role === "STUDENT") {
-                window.location.href = "../student_question.html";
+                window.location.href = "../student.html";
             } else {
-                window.location.href = "../instructor_question.html";
+                window.location.href = "../instructor.html";
             }
         }
     } catch (error) {

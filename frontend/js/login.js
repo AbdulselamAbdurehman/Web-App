@@ -49,17 +49,11 @@ async function login(event) {
             },
         });
         
-        // Check if the response is OK
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
         const data = await response.json();
         console.log(response.status);
         if (response.status === 200) {
             localStorage.setItem('token', data.token);
 
-            // Redirect the user to the appropriate page based on the role
             if (role === "STUDENT") {
                 window.location.href = "../student.html";
             } else {
