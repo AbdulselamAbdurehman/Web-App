@@ -48,7 +48,11 @@ function renderQuiz() {
       return `
       <fieldset class="mb-4 text-left ml-6">
           <legend class="text-xl font-bold mb-4">${index}. ${description}</legend>
+<<<<<<< HEAD
           <input id="${index}1" type="radio" value="1" name="question${index}" class="mx-8">
+=======
+          <input required id="${index}1" type="radio" value="1" name="question${index}" class="mx-8">
+>>>>>>> 06a6434c9cb412f16140bf02c2dcea3517f57e46
           <label for="${index}1">${options[0]}</label><br>
           <input id="${index}2" type="radio" value="2" name="question${index}" class="mx-8">
           <label for="${index}2">${options[1]}</label><br>

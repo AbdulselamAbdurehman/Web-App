@@ -117,11 +117,24 @@ submitAnswer.addEventListener('click', (event) => {
       }
   }
   alert('Your answer has been submitted.');
-  document.getElementById('result-container').innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
+  let resultContainer = document.getElementById('result-container');
+  resultContainer.innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
+  resultContainer.classList.remove("hidden");
+
 });
 window.onload = () => {
     loadQuestionsAndRenderQuiz();
   };
+
+
+
+
+
+
+
+
+
+  
 
 let logOutButton = document.getElementById('logOut');
 logOutButton.addEventListener('click', () => {
