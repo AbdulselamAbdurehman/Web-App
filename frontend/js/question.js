@@ -1,23 +1,7 @@
 let submitButton = document.getElementById("submitQuestion");
 
 
-submitButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    let description = document.getElementById('description');
-    let options = [];
-    for (let i = 1; i <= 4; i++){
-        let option = document.getElementById(`option-${i}`).value;
-        options.push(option)
-    }
-    let answer = document.getElementById('answer');
-    let explanation = document.getElementById('explanation');
-    pushQuestion({
-        description,
-        options,
-        answer,
-        explanation
-    });
-});
+
 
 
 async function pushQuestion(question){
@@ -39,7 +23,57 @@ async function pushQuestion(question){
 
     } catch (error) {
         alert(error.message);
-        window.location.href = '../home.html';
+        return 'error';
+        
+
     }
+    
+    alert("question added successfully");
+    window.location.href = '../instructor.html';
 
 }
+
+
+
+submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    let description = document.getElementById('description').value;
+    let explanation = document.getElementById('explanation').value;
+    let options = [];
+    for (let i = 1; i <= 4; i++){
+        let option = document.getElementById(`option-${i}`).value;
+        if(!option){
+            alert(`option-${i} missing.`);
+            return "error";
+        }
+        options.push(option);
+    }
+    let answerInput = document.getElementById('answer').value;
+   
+    if(!answerInput || !description || !explanation){
+        alert("required fields missing.");
+        return("error");
+    }
+
+    let answer = +answerInput;
+    if(!answer){
+        alert("answer should be  1-4")
+        return ("error")
+    }
+  
+    const question = {
+        description,
+        options,
+        answer,
+        explanation
+    };
+    console.log(question);
+    pushQuestion(question);
+
+});
+
+let logOutButton = document.getElementById('logOut');
+logOutButton.addEventListener('click', () => {
+  window.localStorage.removeItem('token');
+  window.location.href = '../home.html';
+});

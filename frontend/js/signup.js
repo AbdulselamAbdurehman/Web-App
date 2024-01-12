@@ -35,9 +35,9 @@ async function signup(event) {
         if (response.status === 201) {
             localStorage.setItem('token', data.token);
             if (role === "STUDENT") {
-                window.location.href = "../student.html";
+                window.location.href = "../home.html";
             } else {
-                window.location.href = "../instructor.html";
+                window.location.href = "../home.html";
             }
         }
     } catch (error) {

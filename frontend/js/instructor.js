@@ -58,13 +58,13 @@ function renderQuiz() {
                     </button>
                 </span>
           </legend>
-          <input required id="${index}1" type="radio" value="0" name="question${index}" class="mx-8">
+          <input required id="${index}1" type="radio" value="1" name="question${index}" class="mx-8">
           <label for="${index}1">${options[0]}</label><br>
-          <input id="${index}2" type="radio" value="1" name="question${index}" class="mx-8">
+          <input id="${index}2" type="radio" value="2" name="question${index}" class="mx-8">
           <label for="${index}2">${options[1]}</label><br>
-          <input id="${index}3" type="radio" value="2" name="question${index}" class="mx-8">
+          <input id="${index}3" type="radio" value="3" name="question${index}" class="mx-8">
           <label for="${index}3">${options[2]}</label><br>
-          <input id="${index}4" type="radio" value="3" name="question${index}" class="mx-8">
+          <input id="${index}4" type="radio" value="4" name="question${index}" class="mx-8">
           <label for="${index}4">${options[3]}</label><br>
           <div class="explanation hidden mt-2">
               <h3 class="text-lg font-semibold mb-1 text-gray-800">Explanation</h3>
@@ -114,11 +114,24 @@ submitAnswer.addEventListener('click', (event) => {
       }
   }
   alert('Your answer has been submitted.');
-  document.getElementById('result-container').innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
+  let resultContainer = document.getElementById('result-container');
+  resultContainer.innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
+  resultContainer.classList.remove("hidden");
+
 });
 window.onload = () => {
     loadQuestionsAndRenderQuiz();
   };
+
+
+
+
+
+
+
+
+
+  
 
 let logOutButton = document.getElementById('logOut');
 logOutButton.addEventListener('click', () => {

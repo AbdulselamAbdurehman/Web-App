@@ -6,7 +6,6 @@ export class CreateQuestionDto{
     description: string;
 
     @IsNotEmpty()
-    @IsString()
     answer: number;
 
     @IsArray()
