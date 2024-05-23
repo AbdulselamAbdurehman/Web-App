@@ -5,12 +5,12 @@ import { LoginUserDto } from 'src/users/login-user.dto';
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService){}
-
+    
     @Post("login")
     @HttpCode(200)
     loginUser(@Body(ValidationPipe) loginUserDto: LoginUserDto): Promise<{token: string}>{
         console.log("from auth.controller.ts");
-        return this.authService.login(loginUserDto.email,
+        return this.authService.login(loginUserDto.userId,
             loginUserDto.role,
             loginUserDto.password);
     }

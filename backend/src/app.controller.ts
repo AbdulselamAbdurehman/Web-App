@@ -7,11 +7,13 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Redirect('/home.html')
+  @Redirect('/home')
+  redirectToHome() {
+    // This method is just a placeholder for the redirection
+  }
 
-
-  @Get('/home.html')
-  getHello(@Res() response: Response): void {
-    response.sendFile('home.html', {root: "../frontend"});
+  @Get('/home')
+  getHello(@Res() response: Response): void {    
+    response.sendFile('home.html', { root: "../frontend" });
   }
 }
