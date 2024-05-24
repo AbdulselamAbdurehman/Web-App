@@ -9,11 +9,13 @@ export class AppController {
   @Get()
   @Redirect('/home')
   redirectToHome() {
+    console.log('root route is redirecting to home route')
     // This method is just a placeholder for the redirection
   }
 
   @Get('/home')
   getHello(@Res() response: Response): void {    
+    console.log('home route')
     response.sendFile('home.html', { root: "../frontend" });
   }
 }
