@@ -16,6 +16,9 @@ export class UsersService {
       throw new HttpException("Email already exists", HttpStatus.BAD_REQUEST)
     }
 
+    if (await this.UserModel.findOne({username:createUserDto.username})){
+      throw new HttpException("username Already exists", HttpStatus.BAD_REQUEST);
+    }
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
     const createdUser = new this.UserModel({...createUserDto, password:hashedPassword});
     console.log("from users.service.ts");
