@@ -35,6 +35,7 @@ export class UsersController {
     @UseGuards(AuthGuard) //All users(INSTRUCTORS | STUDENTS) can access the route.
     @Patch("username")
     updateUsername(@UserEmail() email: string, @Body(ValidationPipe) changeUsernameDto: ChangeUsernameDto){
-        this.usersService.updateUsername(email, changeUsernameDto.newUsername);
+        return this.usersService.updateUsername(email, changeUsernameDto.newUsername);
     }
+
 }

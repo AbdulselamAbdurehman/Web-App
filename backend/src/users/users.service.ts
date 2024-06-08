@@ -11,13 +11,13 @@ export class UsersService {
 
   async signupUser(createUserDto: CreateUserDto): Promise<User>{
     const saltOrRounds = 10;
-
+    console.log('from users.service.ts');
     if (await this.UserModel.findOne({email: createUserDto.email})){
       throw new HttpException("Email already exists", HttpStatus.BAD_REQUEST)
     }
 
     if (await this.UserModel.findOne({username:createUserDto.username})){
-      throw new HttpException("username Already exists", HttpStatus.BAD_REQUEST);
+      throw new HttpException("Username Already exists", HttpStatus.BAD_REQUEST);
     }
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
     const createdUser = new this.UserModel({...createUserDto, password:hashedPassword});
@@ -47,6 +47,11 @@ export class UsersService {
 
 
   async updateUsername(email: string, username: string): Promise<string> {
+    const user = await this.UserModel.findOne({username});
+    if (user && user.email != email) {
+      throw new HttpException("Username Already Exists.", HttpStatus.BAD_REQUEST);
+    }
+    
     await this.UserModel.findOneAndUpdate({email}, {username});
     return username;
   }
