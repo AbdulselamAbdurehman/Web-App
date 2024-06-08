@@ -21,7 +21,7 @@ export class UsersService {
     }
     const hashedPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
     const createdUser = new this.UserModel({...createUserDto, password:hashedPassword});
-    console.log("from users.service.ts");
+    console.log("from users.service.ts . New user named " + createUserDto.username + " has been created.");
     return createdUser.save();
   }
 
@@ -47,8 +47,8 @@ export class UsersService {
 
 
   async updateUsername(email: string, username: string): Promise<string> {
-    const user = await this.UserModel.findByIdAndUpdate({email}, {username});
-    return user.username;
+    await this.UserModel.findOneAndUpdate({email}, {username});
+    return username;
   }
 
   async updatePassword(email: string, oldPassword: string, newPassword: string){
@@ -56,12 +56,11 @@ export class UsersService {
    
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
-        throw new HttpException("Wrong password", HttpStatus.BAD_REQUEST);
+        throw new HttpException("Wrong Password", HttpStatus.BAD_REQUEST);
     }
     const salt = await bcrypt.genSalt();
    
     const hashedNewPassword = await bcrypt.hash(newPassword, salt);
-    
     user.password = hashedNewPassword;
     await user.save();
 

@@ -12,7 +12,6 @@ export class AuthService {
         async login(userId: string, role: string, password: string): Promise<{token: string}> {
           const user = await this.usersService.findOneByEmail(userId) || await this.usersService.findOneByUsername(userId);
         
-          console.log("From auth.service.ts\n", user);
           if (!user || user.role !== role) {
             throw new UnauthorizedException("User does not exist!");
           }
@@ -24,9 +23,13 @@ export class AuthService {
           }
         
           const payload = { sub: user.email, role: user.role };
+          
+          console.log("From auth.service.ts\n", user);
+          
           return {
             token: await this.jwtService.signAsync(payload),
           };
+          
         }
               
 

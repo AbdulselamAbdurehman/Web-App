@@ -5,6 +5,7 @@ import { UserEmail } from 'src/auth/decorators/user-email.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { ChangeUsernameDto } from './dto/change-username.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +13,7 @@ export class UsersController {
 
     @Post("/signup") // create a new user account
     create(@Body(ValidationPipe) createUserDto: CreateUserDto){
-        console.log("from users.controller.ts");
+        console.log("signup end point get called.");
         return this.usersService.signupUser(createUserDto);
     }
 
@@ -30,10 +31,10 @@ export class UsersController {
     deleteAccount(@UserEmail() email: string){
         return this.usersService.deleteUser(email);
     }
-
+   
     @UseGuards(AuthGuard) //All users(INSTRUCTORS | STUDENTS) can access the route.
     @Patch("username")
-    updateUsername(@UserEmail() email: string, newUsername: {newUser: string}){
-        this.usersService.updateUsername(email, newUsername.newUser);
+    updateUsername(@UserEmail() email: string, @Body(ValidationPipe) changeUsernameDto: ChangeUsernameDto){
+        this.usersService.updateUsername(email, changeUsernameDto.newUsername);
     }
 }

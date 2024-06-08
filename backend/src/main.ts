@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }));
 
   app.useStaticAssets(join(__dirname, '..','..', 'frontend'));
-
+  
   app.enableCors();
   await app.listen(3000);
 }
