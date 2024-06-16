@@ -47,6 +47,7 @@ export class UsersService {
 
 
   async updateUsername(email: string, username: string): Promise<string> {
+    console.log("PATCH baseURL/users/username");
     const user = await this.UserModel.findOne({username});
     if (user && user.email != email) {
       throw new HttpException("Username Already Exists.", HttpStatus.BAD_REQUEST);
