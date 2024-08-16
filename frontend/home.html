@@ -36,7 +36,9 @@
     <!-- Login Form -->
     <form class="flex flex-col items-center">
         <input required type="email" id="email" autocomplete="email" placeholder="Email" class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500">
+        <p class='invalid-credential' style='display:none;'>Invalid credentials</p>
         <input required type="password" id="password" autocomplete="current-password"  placeholder="Password" class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500">
+        <p class='invalid-credential' style='display:none;'>Invalid credentials</p>
         <button type="submit" id="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl focus:outline-none focus:ring focus:border-blue-500">
             Login
         </button>
