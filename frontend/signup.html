@@ -1,45 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to Online Quiz - Signup</title>
     <!-- Include Tailwind CSS via CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-200 h-screen flex items-center justify-start flex-col">
-
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-200 h-screen flex items-center justify-start flex-col">
     <!-- Header -->
-    <div class="text-6xl font-bold mt-8 mb-4 text-center">Welcome to Online Quiz</div>
-    <div class="text-xl text-gray-600 mb-8 text-center">Unlock Your Knowledge Anytime, Anywhere</div>
+    <div class="text-6xl font-bold mt-8 mb-4 text-center">
+      Welcome to Online Quiz
+    </div>
+    <div class="text-xl text-gray-600 mb-8 text-center">
+      Unlock Your Knowledge Anytime, Anywhere
+    </div>
     <!-- Signup Button -->
-    <a href="home.html" class="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Login</a>
+    <a
+      href="home.html"
+      class="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+      >Login</a
+    >
 
     <!-- Signup As Section -->
     <div class="text-4xl mb-4">Sign Up</div>
 
     <!-- Radio Buttons for Role Selection -->
     <div class="flex mb-4 items-center">
-        <label class="inline-flex items-center mr-4 text-xl">
-            <input type="radio" class="form-radio h-6 w-6 text-blue-500" name="role" value="INSTRUCTOR">
-            <span class="ml-2 text-gray-700">Instructor</span>
-        </label>
-        <label class="inline-flex items-center text-xl">
-            <input type="radio" checked class="form-radio h-6 w-6 text-blue-500" name="role" value="STUDENT">
-            <span class="ml-2 text-gray-700">Student</span>
-        </label>
+      <label class="inline-flex items-center mr-4 text-xl">
+        <input
+          type="radio"
+          class="form-radio h-6 w-6 text-blue-500"
+          name="role"
+          value="INSTRUCTOR"
+        />
+        <span class="ml-2 text-gray-700">Instructor</span>
+      </label>
+      <label class="inline-flex items-center text-xl">
+        <input
+          type="radio"
+          checked
+          class="form-radio h-6 w-6 text-blue-500"
+          name="role"
+          value="STUDENT"
+        />
+        <span class="ml-2 text-gray-700">Student</span>
+      </label>
     </div>
     <!-- Signup Form -->
     <form class="flex flex-col items-center">
-        <input required id="name" type="text" placeholder="Firstname Lastname" class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500">
-        <input required id="email" type="email" placeholder="Email" class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500">
-        <input required id="password" type="password" placeholder="Password (8-15 characters)" class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500">
-        <button id="submit" type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl focus:outline-none focus:ring focus:border-blue-500">
-            Sign Up
-        </button>
+      <input
+        required
+        id="username"
+        type="text"
+        placeholder="Username"
+        class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
+      />
+      <input
+        required
+        id="email"
+        type="email"
+        placeholder="Email"
+        class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
+      />
+      <input
+        required
+        id="password"
+        type="password"
+        placeholder="Password (8-15 characters)"
+        class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
+      />
+      <button
+        id="submit"
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl focus:outline-none focus:ring focus:border-blue-500"
+      >
+        Sign Up
+      </button>
     </form>
-    <footer class="bg-black text-white text-lg text-center p-4 fixed bottom-0 w-full">©2024 Online-quiz | All Rights Reserved</footer>
-
+    <footer
+      class="bg-black text-white text-lg text-center p-4 fixed bottom-0 w-full"
+    >
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      QuizApp | All Rights Reserved
+    </footer>
     <script src="js/signup.js"></script>
-</body>
+  </body>
 </html>

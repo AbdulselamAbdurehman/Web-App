@@ -11,7 +11,7 @@ async function signup(event) {
             role = roleButtons[i].value;
         }
     }
-    let name = document.getElementById("name").value;
+    let username = document.getElementById("username").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
@@ -23,7 +23,7 @@ async function signup(event) {
                 email,
                 password,
                 role,
-                name
+                username
             }),
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',

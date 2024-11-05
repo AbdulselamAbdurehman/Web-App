@@ -31,7 +31,7 @@ button.addEventListener('click', login);
 async function login(event) {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const userId = document.getElementById("userId").value;
     const password = document.getElementById("password").value;
     const role = document.querySelector('input[name="role"]:checked').value;
 
@@ -40,7 +40,7 @@ async function login(event) {
         const response = await fetch(endPoint, {
             method: 'POST',
             body: JSON.stringify({
-                email,
+                userId,
                 password,
                 role
             }),
