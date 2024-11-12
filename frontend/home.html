@@ -12,84 +12,85 @@
     <!-- <link rel="stylesheet" href="src/output.css"> -->
   </head>
 
-  <body class="bg-gray-200 h-screen flex flex-col items-center justify-start">
+  <body class="bg-gray-200 h-screen flex flex-col items-center justify-between">
     <!-- Header -->
-    <div class="text-6xl font-bold mt-8 mb-4 text-center">
-      Welcome to QuizApp
-    </div>
-    <div class="text-xl text-gray-600 mb-8 text-center">
-      Unlock Your Knowledge Anytime, Anywhere
-    </div>
+    <main class="flex flex-col items-center w-full p-4">
+      <div class="grid justify-items-end w-full mt-4 pr-4">
+        <!-- Signup Button -->
+        <a
+          href="signup.html"
+          class="top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >Signup</a
+        >
+      </div>
+      <div class="text-6xl font-bold mt-8 mb-4 text-center">
+        Welcome to QuizApp
+      </div>
+      <div class="text-xl text-gray-600 mb-8 text-center">
+        Unlock Your Knowledge Anytime, Anywhere
+      </div>
 
-    <!-- Signup Button -->
-    <a
-      href="signup.html"
-      class="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-      >Signup</a
-    >
+      <!-- Login Section -->
+      <div class="text-4xl mb-4">Login</div>
 
-    <!-- Login Section -->
-    <div class="text-4xl mb-4">Login</div>
+      <!-- Radio Buttons for Role Selection -->
+      <div class="flex mb-4 items-center">
+        <label class="inline-flex items-center mr-4 text-xl">
+          <input
+            type="radio"
+            class="form-radio h-6 w-6 text-blue-500"
+            name="role"
+            value="INSTRUCTOR"
+          />
+          <span class="ml-2 text-gray-700">Instructor</span>
+        </label>
+        <label class="inline-flex items-center text-xl">
+          <input
+            type="radio"
+            class="form-radio h-6 w-6 text-blue-500"
+            checked
+            name="role"
+            value="STUDENT"
+          />
+          <span class="ml-2 text-gray-700">Student</span>
+        </label>
+      </div>
 
-    <!-- Radio Buttons for Role Selection -->
-    <div class="flex mb-4 items-center">
-      <label class="inline-flex items-center mr-4 text-xl">
+      <!-- Login Form -->
+      <form class="flex flex-col items-center">
         <input
-          type="radio"
-          class="form-radio h-6 w-6 text-blue-500"
-          name="role"
-          value="INSTRUCTOR"
+          required
+          id="userId"
+          name="userId"
+          autocomplete="userId"
+          placeholder="Username or Email"
+          class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
         />
-        <span class="ml-2 text-gray-700">Instructor</span>
-      </label>
-      <label class="inline-flex items-center text-xl">
+        <p class="invalid-credential" style="display: none">
+          Invalid credentials
+        </p>
         <input
-          type="radio"
-          class="form-radio h-6 w-6 text-blue-500"
-          checked
-          name="role"
-          value="STUDENT"
+          required
+          type="password"
+          id="password"
+          name="password"
+          autocomplete="current-password"
+          placeholder="Password"
+          class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
         />
-        <span class="ml-2 text-gray-700">Student</span>
-      </label>
-    </div>
-
-    <!-- Login Form -->
-    <form class="flex flex-col items-center">
-      <input
-        required
-        id="userId"
-        name="userId"
-        autocomplete="userId"
-        placeholder="Username or Email"
-        class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
-      />
-      <p class="invalid-credential" style="display: none">
-        Invalid credentials
-      </p>
-      <input
-        required
-        type="password"
-        id="password"
-        name="password"
-        autocomplete="current-password"
-        placeholder="Password"
-        class="w-80 mb-4 px-4 py-2 border rounded-md text-xl focus:outline-none focus:ring focus:border-blue-500"
-      />
-      <p class="invalid-credential" style="display: none">
-        Invalid credentials
-      </p>
-      <button
-        type="submit"
-        id="submit"
-        class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl focus:outline-none focus:ring focus:border-blue-500"
-      >
-        Login
-      </button>
-    </form>
-    <footer
-      class="bg-black text-white text-lg text-center p-4 fixed bottom-0 w-full"
-    >
+        <p class="invalid-credential" style="display: none">
+          Invalid credentials
+        </p>
+        <button
+          type="submit"
+          id="submit"
+          class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl focus:outline-none focus:ring focus:border-blue-500"
+        >
+          Login
+        </button>
+      </form>
+    </main>
+    <footer class="bg-black text-white text-lg text-center p-4 bottom-0 w-full">
       <script>
         document.write(new Date().getFullYear());
       </script>

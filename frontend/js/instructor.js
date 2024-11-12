@@ -5,9 +5,7 @@ async function loadQuestionsAndRenderQuiz() {
       renderQuiz(questionList);
 
     } catch (error) {
-      alert(error.message);
       console.error('Error loading questions:', error);
-      window.location.href = "../home.html";
   }
 }
 
@@ -29,9 +27,7 @@ async function fetchQuestions() {
         const questionList = await response.json();
         return questionList;
     } catch (error) {
-        alert(error.message);
         console.error('Error fetching questions:', error);
-        window.location.href = "../home.html";
     }
 }
 
@@ -42,30 +38,30 @@ function renderQuiz() {
       const form = questionList.map(question => {
       const description = question.description;
       const options = question.options;
-
+        const questionNum = question.questionNumber;
       const explanation = question.explanation;
       index++;
 
       return `
-          <fieldset class="mb-4 text-left ml-6" id="question-num-${index}">
+          <fieldset class="mb-4 text-left ml-6" id="question-num-${questionNum}">
             <legend class="text-xl font-bold flex flex-row relative w-full">${index}. ${description}
-                <span class="actions absolute top-0 right-0 flex items-center mr-2">
-                    <button class="edit-btn" id="edit-btn-${index}">
+                <span class="actions top-0 right-0 flex items-center mr-2">
+                    <button class="edit-btn" id="edit-btn-${questionNum}">
                         <i class="fas fa-pencil-alt ml-2 mr-3"></i> <!-- Pen icon -->
                     </button>
-                    <button class="delete-btn" id="delete-btn-${index}">
+                    <button class="delete-btn" id="delete-btn-${questionNum}">
                         <i class="fas fa-trash-alt ml-2 mr-6"></i> <!-- Bin icon -->
                     </button>
                 </span>
           </legend>
-          <input required id="${index}1" type="radio" value="1" name="question${index}" class="mx-8">
-          <label for="${index}1">${options[0]}</label><br>
-          <input id="${index}2" type="radio" value="2" name="question${index}" class="mx-8">
-          <label for="${index}2">${options[1]}</label><br>
-          <input id="${index}3" type="radio" value="3" name="question${index}" class="mx-8">
-          <label for="${index}3">${options[2]}</label><br>
-          <input id="${index}4" type="radio" value="4" name="question${index}" class="mx-8">
-          <label for="${index}4">${options[3]}</label><br>
+          <input required id="${questionNum}1" type="radio" value="1" name="question${questionNum}" class="mx-8">
+          <label for="${questionNum}1">${options[0]}</label><br>
+          <input id="${questionNum}2" type="radio" value="2" name="question${questionNum}" class="mx-8">
+          <label for="${questionNum}2">${options[1]}</label><br>
+          <input id="${questionNum}3" type="radio" value="3" name="question${questionNum}" class="mx-8">
+          <label for="${questionNum}3">${options[2]}</label><br>
+          <input id="${questionNum}4" type="radio" value="4" name="question${questionNum}" class="mx-8">
+          <label for="${questionNum}4">${options[3]}</label><br>
           <div class="explanation hidden mt-2">
               <h3 class="text-lg font-semibold mb-1 text-gray-800">Explanation</h3>
               <p class="text-sm text-gray-700">${explanation}</p>
@@ -78,8 +74,8 @@ function renderQuiz() {
     console.log("undefined list");
   }
   for (let i = 1; i <= questionList.length; i++){
-        const deleteButton = document.querySelector(`#delete-btn-${i}`);
-        const editButton = document.querySelector(`#edit-btn-${i}`);
+        const deleteButton = document.querySelector(`#delete-btn-${questionList[i-1].questionNumber}`);
+        const editButton = document.querySelector(`#edit-btn-${questionList[i-1].questionNumber}`);
 
         deleteButton.addEventListener('click', () =>{
             deleteQuestion(questionList[i-1]);
@@ -113,7 +109,7 @@ submitAnswer.addEventListener('click', (event) => {
       correct++;
       }
   }
-  alert('Your answer has been submitted.');
+  console.log('your answers have been submitted');
   let resultContainer = document.getElementById('result-container');
   resultContainer.innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
   resultContainer.classList.remove("hidden");
@@ -124,15 +120,6 @@ window.onload = () => {
   };
 
 
-
-
-
-
-
-
-
-  
-
 let logOutButton = document.getElementById('logOut');
 logOutButton.addEventListener('click', () => {
   window.localStorage.removeItem('token');
@@ -141,8 +128,6 @@ logOutButton.addEventListener('click', () => {
 
 
 async function deleteQuestion(question) {
-    alert("deletion ongoing.");
-    if (confirm("Do you want to delete this question?")){
         try {
             let questionNum = question.questionNumber;
             const endpoint = `http://localhost:3000/questions/${questionNum}`;
@@ -168,16 +153,82 @@ async function deleteQuestion(question) {
                 alert('An error occurred while deleting the question.');
             }
         }
+}
+
+
+
+function editQuestion(question) {
+    console.log(question);
+    console.log("editQuestion called!");
+    // Get the question container where the question content is displayed
+    const questionContainer = document.getElementById(`question-num-${question.questionNumber}`);
+    console.log(questionContainer);
+    // return null;
+    // Create input fields with the current values for the question details
+    const editableForm = `
+      <input type="text" id="edit-description" value="${question.description}" class="w-full mb-2 p-2 border rounded"/>
+      <input type="text" id="edit-option1" value="${question.options[0]}" class="w-full mb-2 p-2 border rounded"/>
+      <input type="text" id="edit-option2" value="${question.options[1]}" class="w-full mb-2 p-2 border rounded"/>
+      <input type="text" id="edit-option3" value="${question.options[2]}" class="w-full mb-2 p-2 border rounded"/>
+      <input type="text" id="edit-option4" value="${question.options[3]}" class="w-full mb-2 p-2 border rounded"/>
+      <input type="number" id="edit-answer" value="${question.answer}" class="w-full mb-2 p-2 border rounded"/>
+      <textarea id="edit-explanation" class="w-full mb-2 p-2 border rounded">${question.explanation}</textarea>
+      <button id="save-edit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Save</button>
+      <button id="cancel-edit" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Cancel</button>
+    `;
+
+    // Replace the question container content with the editable form
+    questionContainer.innerHTML = editableForm;
+
+    // Add event listener for the Save button
+    document.getElementById("save-edit").addEventListener("click", () => {
+        saveQuestionEdits(question.questionNumber);
+    });
+
+    // Add event listener for the Cancel button to reload the page and show original content
+    document.getElementById("cancel-edit").addEventListener("click", () => {
+        window.location.reload();
+    });
+}
+
+async function saveQuestionEdits(questionNum) {
+    // Retrieve updated values from input fields
+    const updatedQuestion = {
+        description: document.getElementById("edit-description").value,
+        options: [
+            document.getElementById("edit-option1").value,
+            document.getElementById("edit-option2").value,
+            document.getElementById("edit-option3").value,
+            document.getElementById("edit-option4").value,
+        ],
+        answer: parseInt(document.getElementById("edit-answer").value),
+        explanation: document.getElementById("edit-explanation").value
+    };
+
+    // Send the PATCH request to update the question on the server
+    try {
+        const endpoint = `http://localhost:3000/questions/${questionNum}`;
+        const token = localStorage.getItem('token');
+        const response = await fetch(endpoint, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(updatedQuestion)
+        });
+
+        if (response.ok) {
+            console.log('Question updated successfully.');
+            window.location.reload();
+        } else {
+            throw new Error('Failed to update question.');
+        }
+    } catch (error) {
+        console.error("Error updating question:", error);
+        console.log('An error occurred while updating the question.');
     }
 }
-
-
-
-function editQuestion(question){
-    console.log("editQuestion called!");
-    alert("edition ongoing.");
-}
-
 
 let addQuestion = document.getElementById('addQuestion');
 addQuestion.addEventListener('click', (event) => {

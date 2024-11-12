@@ -3,7 +3,6 @@ let submitButton = document.getElementById("submitQuestion");
 
 
 
-
 async function pushQuestion(question){
     try {
         const endpoint = 'http://localhost:3000/questions/';

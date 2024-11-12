@@ -33,13 +33,10 @@ async function signup(event) {
         const data = await response.json();
 
         if (response.status === 201) {
-            localStorage.setItem('token', data.token);
-            if (role === "STUDENT") {
-                window.location.href = "../home.html";
-            } else {
+                localStorage.setItem('token', data.token);
                 window.location.href = "../home.html";
             }
-        }
+
     } catch (error) {
         if (error instanceof TypeError && error.message.includes('Network request failed')) {
             alert('Network error. Please check your internet connection.');

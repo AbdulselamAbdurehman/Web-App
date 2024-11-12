@@ -13,39 +13,42 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-gray-100">
-    <div class="p-8 text-4xl font-bold mt-8 mb-4 text-center">
-      Manage Questions
-    </div>
+  <body class="bg-gray-100 flex flex-col min-h-screen justify-between">
+    <main class="w-full p-4">
+      <div class="grid justify-items-end w-full mt-4 pr-4">
+        <!-- Signup Button -->
+        <button
+          id="logOut"
+          class="top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+        >
+          Log out
+        </button>
+      </div>
 
-    <div id="quiz-container" class="max-w-xl mx-auto py-8"></div>
-    <button
-      id="submit"
-      class="bg-blue-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out"
-    >
-      Submit
-    </button>
-    <button
-      id="addQuestion"
-      class="bg-green-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-green-700 focus:outline-none focus:shadow-outline-green active:bg-green-800 transition duration-150 ease-in-out"
-    >
-      Add Question
-    </button>
-    <!-- <div id="result-container" class="mt-8 text-center font-bold text-lg bg-blue-200 p-4 rounded-md"></div> -->
-    <div
-      id="result-container"
-      class="hidden text-center font-bold text-lg bg-blue-200 p-4 rounded-md"
-    ></div>
+      <div class="p-8 text-4xl font-bold mt-8 mb-4 text-center">
+        Manage Questions
+      </div>
 
-    <button
-      id="logOut"
-      class="absolute top-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-    >
-      Log out
-    </button>
-    <footer
-      class="bg-black text-white text-lg text-center p-4 fixed bottom-0 w-full"
-    >
+      <div id="quiz-container" class="max-w-xl mx-auto py-8"></div>
+      <button
+        id="submit"
+        class="bg-blue-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out"
+      >
+        Submit
+      </button>
+      <button
+        id="addQuestion"
+        class="bg-green-500 text-white font-bold py-3 px-6 rounded-full my-4 mx-auto block text-xl hover:bg-green-700 focus:outline-none focus:shadow-outline-green active:bg-green-800 transition duration-150 ease-in-out"
+      >
+        Add Question
+      </button>
+      <!-- <div id="result-container" class="mt-8 text-center font-bold text-lg bg-blue-200 p-4 rounded-md"></div> -->
+      <div
+        id="result-container"
+        class="hidden text-center font-bold text-lg bg-blue-200 p-4 rounded-md"
+      ></div>
+    </main>
+    <footer class="bg-black text-white text-lg text-center p-4 bottom-0 w-full">
       <script>
         document.write(new Date().getFullYear());
       </script>

@@ -4,9 +4,7 @@ async function loadQuestionsAndRenderQuiz() {
       questionList = await fetchQuestions(); 
       renderQuiz(questionList);
   } catch (error) {
-      alert(error.message);
       console.error('Error loading questions:', error);
-      window.location.href = "../home.html";
   }
 }
 
@@ -28,9 +26,7 @@ async function fetchQuestions() {
         const questionList = await response.json();
         return questionList;
     } catch (error) {
-        alert(error.message);
         console.error('Error fetching questions:', error);
-        window.location.href = "../home.html";
     }
 }
 

@@ -15,7 +15,7 @@ export class QuestionsController {
   @UseGuards(AuthGuard) //All users(INSTRUCTORS | STUDENTS) can access the route.
   @Get()
   async findSome(): Promise<Question[]> {
-    console.log('from questoins.controller.ts');
+    console.log('from questions.controller.ts');
     return await this.questionsService.findSome();
   }
 
