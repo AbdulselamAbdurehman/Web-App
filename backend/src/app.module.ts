@@ -7,7 +7,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { NotesModule } from './notes/notes.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DB_SECRET } from './constants';
 
 
 @Module({
@@ -18,7 +17,7 @@ import { DB_SECRET } from './constants';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: DB_SECRET,
+        uri: configService.get<string>('DB_URI'),
       }),
       inject: [ConfigService],
     }),

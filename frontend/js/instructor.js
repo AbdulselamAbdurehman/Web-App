@@ -95,7 +95,7 @@ submitAnswer.addEventListener('click', (event) => {
   for (let i = 1; i <= questionList.length; i++) {
       const answer = document.querySelector(`input[name="question${i}"]:checked`)
       if (!answer) {
-          alert(`Please answer question ${i}`);
+          console.log(`Please answer question ${i}`);
           return;
       }
       userAnswers.push(answer.value);
@@ -141,16 +141,16 @@ async function deleteQuestion(question) {
             });
 
             if (response.ok){
-                alert("Question successfully deleted.");
+                console.log("Question successfully deleted.");
                 window.location.href = "../instructor.html";
             } else {
                 throw new Error('Failed to delete question.');
             }
         } catch (error) {
             if (response && response.status === 401) {
-                alert('Only Instructors can delete a question.');
+                console.log('Only Instructors can delete a question.');
             } else {
-                alert('An error occurred while deleting the question.');
+                console.log('An error occurred while deleting the question.');
             }
         }
 }

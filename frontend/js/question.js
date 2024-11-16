@@ -21,13 +21,13 @@ async function pushQuestion(question){
         }
 
     } catch (error) {
-        alert(error.message);
+        console.log(error.message);
         return 'error';
         
 
     }
     
-    alert("question added successfully");
+    console.log("question added successfully");
     window.location.href = '../instructor.html';
 
 }
@@ -42,7 +42,7 @@ submitButton.addEventListener('click', (event) => {
     for (let i = 1; i <= 4; i++){
         let option = document.getElementById(`option-${i}`).value;
         if(!option){
-            alert(`option-${i} missing.`);
+            console.log(`option-${i} missing.`);
             return "error";
         }
         options.push(option);
@@ -50,13 +50,13 @@ submitButton.addEventListener('click', (event) => {
     let answerInput = document.getElementById('answer').value;
    
     if(!answerInput || !description || !explanation){
-        alert("required fields missing.");
+        console.log("required fields missing.");
         return("error");
     }
 
     let answer = +answerInput;
     if(!answer){
-        alert("answer should be  1-4")
+        console.log("answer should be  1-4")
         return ("error")
     }
   

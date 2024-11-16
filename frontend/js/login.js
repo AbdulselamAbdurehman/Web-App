@@ -62,10 +62,10 @@ async function login(event) {
         }
     } catch (error) {
         if (error instanceof TypeError && error.message.includes('Network request failed')) {
-            alert('Network error. Please check your internet connection.');
+            console.log('Network error. Please check your internet connection.');
         } else {
             const errorMessage = error.message || 'An unknown error occurred.';
-            alert(`Please carefully enter your credentials.`);
+            console.log(`Please carefully enter your credentials.`);
         }
         window.location.href = '../home.html';
     }

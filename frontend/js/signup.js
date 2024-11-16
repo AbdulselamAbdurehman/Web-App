@@ -39,10 +39,10 @@ async function signup(event) {
 
     } catch (error) {
         if (error instanceof TypeError && error.message.includes('Network request failed')) {
-            alert('Network error. Please check your internet connection.');
+            console.log('Network error. Please check your internet connection.');
         } else {
             const errorMessage = error.message || 'An unknown error occurred.';
-            alert(`Error: ${errorMessage}`);
+            console.log(`Error: ${errorMessage}`);
         }
         window.location.href = '../signup.html';
     }

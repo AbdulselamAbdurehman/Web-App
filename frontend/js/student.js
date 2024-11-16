@@ -72,7 +72,7 @@ submitAnswer.addEventListener('click', (event) => {
   for (let i = 1; i <= questionList.length; i++) {
       const answer = document.querySelector(`input[name="question${i}"]:checked`)
       if (!answer) {
-          alert(`Please answer question ${i}`);
+          console.log(`Please answer question ${i}`);
           return;
       }
       userAnswers.push(answer.value);
@@ -86,7 +86,7 @@ submitAnswer.addEventListener('click', (event) => {
       correct++;
       }
   }
-  alert('Your answer has been submitted.');
+  console.log('Your answer has been submitted.');
   let resultContainer = document.getElementById('result-container');
   resultContainer.innerHTML =`<h3>${correct} of ${questionList.length} correct!</h3>`;
   resultContainer.classList.remove("hidden");
