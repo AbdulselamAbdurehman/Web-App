@@ -1,4 +1,4 @@
-# Web-App
+# QuizApp
 ## members                  id 
 - Abdulselam Abdurehman    UGR/2455/14
 - Daniel Asrat             UGR/4100/14
